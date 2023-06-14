@@ -1,0 +1,26 @@
+.content {
+    min-width: 15vw;
+    padding: 15px;
+}
+
+.channel-menu {
+    display: flex;
+    align-items: center;
+}
+
+.channels {
+    display: flex;
+    flex-direction: column;
+    
+
+    a {
+        cursor: pointer;
+        transition: all ease-in-out 175ms;
+        text-decoration: none;
+        color: white;
+        &:hover {
+            color: lightgrey;
+
+        }
+    }
+}

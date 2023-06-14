@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'slack-clone-group';
+  link;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event['url']) {
+        this.link = event['url'];
+      }
+    });
+  }
+
+
 
   /* import { Firestore, collection, onSnapshot, addDoc, setDoc, doc } from '@angular/fire/firestore'; // Imports
 

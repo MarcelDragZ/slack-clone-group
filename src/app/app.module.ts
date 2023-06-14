@@ -11,12 +11,18 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { LeftSideMenuComponent } from './left-side-menu/left-side-menu.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import { ChannelComponent } from './channel/channel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    LeftSideMenuComponent,
+    ChannelComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,9 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
