@@ -1,0 +1,129 @@
+.login_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.login_header {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+  margin-bottom: 8px;
+  img {
+    object-fit: contain;
+    width: 100px;
+  }
+}
+
+.login_headline {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.75px;
+    line-height: 46px;
+    margin-bottom: 10px;
+    max-width: 700px;
+    text-align: center;
+    color: rgb(29, 28, 29);
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  max-width: 400px;
+  height: 200px;
+  div {
+    display: flex;
+    flex-direction: column;
+    input {
+      color: rgb(29, 28, 29);
+      padding-left: 10px;
+      transition: 0.1s ease-in-out;
+      margin-bottom: 22px;
+      height: 42px;
+      border: 1px solid rgba(0, 0, 0, 0.301);
+      border-radius: 5px;
+      font-size: 18px;
+      &:focus {
+        box-shadow: 0px 0px 0px 4px rgb(187, 225, 241);
+        transition: 0.1s ease-in-out;
+        border: 1px solid rgb(18, 100, 163);
+        outline: none;
+      }
+    }
+    button {
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      background-color: rgb(103, 39, 110);
+      height: 44px;
+      border: none;
+      border-radius: 5px;
+      transition: 0.1s ease-in-out;
+      &:hover {
+        background-color: rgb(112, 53, 120);
+        transition: 0.1s ease-in-out;
+      }
+      &:active {
+        box-shadow: 0px 0px 0px 4px rgb(187, 225, 241);
+        transition: 0.1s ease-in-out;
+        border: 1px solid rgb(18, 100, 163);
+        outline: none;
+      }
+    }
+  }
+}
+
+.extern_login_placeholer {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+.extern_login_buttons {
+  margin-top: 10px;
+}
+
+.extern_button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  height: 40px;
+  width: 400px;
+  border-radius: 5px;
+  color: rgb(29, 28, 29);
+  transition: 0.1s ease-in-out;
+  border: 2px solid rgba(0, 0, 0, 0.301);
+  img {
+    object-fit: contain;
+    width: 16px;
+    padding-right: 10px;
+  }
+  &:hover {
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.199);
+    transition: 0.1s ease-in-out;
+    outline: none;
+  }
+  &:active {
+    box-shadow: 0px 0px 0px 4px rgb(187, 225, 241);
+    transition: 0.1s ease-in-out;
+    border: 1px solid rgb(18, 100, 163);
+    outline: none;
+  }
+}
