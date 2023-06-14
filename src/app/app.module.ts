@@ -15,6 +15,7 @@ import { LeftSideMenuComponent } from './left-side-menu/left-side-menu.component
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { ChannelComponent } from './channel/channel.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ChannelComponent } from './channel/channel.component';
     LoginComponent,
     WorkspaceComponent,
     LeftSideMenuComponent,
-    ChannelComponent
+    ChannelComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

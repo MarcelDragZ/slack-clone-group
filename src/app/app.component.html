@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container left-container" *ngIf="link != '/'">
+<mat-drawer-container class="example-container left-container" *ngIf="link !== '/' && link !== '/register'">
     <mat-drawer mode="side" opened>
         <app-left-side-menu></app-left-side-menu>
     </mat-drawer>
@@ -7,4 +7,4 @@
 </mat-drawer-container>
 
 
-<router-outlet *ngIf="link == '/'"></router-outlet>
+<router-outlet *ngIf="link == '/' || link == '/register'"></router-outlet>
