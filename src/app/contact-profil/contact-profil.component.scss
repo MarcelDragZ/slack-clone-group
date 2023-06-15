@@ -1,0 +1,24 @@
+.profil_header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.profil_center_container {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+
+    img {
+        width: 90%;
+        margin: 10px;
+        border-radius: 10px;
+    }
+}
+.schedule_position {
+    display: flex;
+    align-items: center;
+}
+
+.green-icon {
+    color: green;
+}
