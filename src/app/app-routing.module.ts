@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'workspace', component: WorkspaceComponent },
-  { path: 'channel/:id', component: ChannelComponent },
+  { path: 'workspace/channel/:id', component: ChannelComponent },
 ];
 
 @NgModule({

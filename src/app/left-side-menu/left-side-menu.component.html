@@ -4,7 +4,7 @@
       <mat-icon *ngIf="channelOpen" (click)="channelOpen = false">expand_less</mat-icon>
       <mat-icon *ngIf="!channelOpen" (click)="channelOpen = true">expand_more</mat-icon> Channels</div>
   <div *ngIf="channelOpen" class="channels">
-      <a *ngFor="let channel of channels" [routerLink]="['/channel/' + channel.id]">
+      <a *ngFor="let channel of channels" [routerLink]="['/workspace/channel/' + channel.id]">
           {{ channel.channelName }}
       </a>
   </div>
