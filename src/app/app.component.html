@@ -7,11 +7,10 @@
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
-
-    <mat-drawer mode="side" opened position="end" class="profil_app">
-      <app-contact-profil></app-contact-profil>
-    </mat-drawer>
   </mat-drawer-content>
+  <mat-drawer mode="side" opened position="end" class="profil_app">
+    <app-contact-profil></app-contact-profil>
+  </mat-drawer>
 </mat-drawer-container>
 
 <router-outlet *ngIf="link == '/' || link == '/register'"></router-outlet>
