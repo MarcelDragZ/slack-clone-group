@@ -7,13 +7,4 @@ import { Router } from '@angular/router';
   styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent {
-  link;
-
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event['url']) {
-        this.link = event['url'];
-      }
-    });
-  }
 }

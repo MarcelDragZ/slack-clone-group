@@ -28,5 +28,5 @@ export class LeftSideMenuComponent {
       console.log(this.channels)
     })
   }
-  
+
 }

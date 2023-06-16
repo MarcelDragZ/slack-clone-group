@@ -1,19 +1,17 @@
-<mat-drawer-container class="example-container left-container" *ngIf="link !== '/' && link !== '/register'">
-    <mat-drawer mode="side" opened>
-        <app-left-side-menu></app-left-side-menu>
+<mat-drawer-container
+  class="example-container left-container"
+  *ngIf="link !== '/' && link !== '/register'"
+>
+  <mat-drawer mode="side" opened position="start">
+    <app-left-side-menu></app-left-side-menu>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+
+    <mat-drawer mode="side" opened position="end" class="profil_app">
+      <app-contact-profil></app-contact-profil>
     </mat-drawer>
-    <mat-drawer-content><router-outlet></router-outlet>
-
-        <mat-drawer mode="side" opened class="profil_app"> 
-            <app-contact-profil></app-contact-profil>
-        </mat-drawer>
-    </mat-drawer-content>
-
-
-
-
-
+  </mat-drawer-content>
 </mat-drawer-container>
-
 
 <router-outlet *ngIf="link == '/' || link == '/register'"></router-outlet>
