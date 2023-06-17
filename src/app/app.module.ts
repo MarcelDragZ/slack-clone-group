@@ -25,6 +25,9 @@ import { SetStatusDialogComponent } from './set-status-dialog/set-status-dialog.
 import { EditContactInformationDialogComponent } from './edit-contact-information-dialog/edit-contact-information-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { OwnProfilComponent } from './own-profil/own-profil.component';
+import { FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,8 @@ import { OwnProfilComponent } from './own-profil/own-profil.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

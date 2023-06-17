@@ -1,5 +1,7 @@
-
-<button routerLink="/register">change to register</button>
+<div class="fix_right">
+  <span>Not an account ?</span>
+  <a routerLink="register">change to register</a>
+</div>
 
 <div class="login_container">
   <div class="login_header">
@@ -10,13 +12,17 @@
     <h1>Login for Slack-Clone</h1>
   </div>
 
-  <form action="">
+  <div class="login_headline2">
+    We recommend that you use the email address you use at work.
+  </div>
+
+  <div class="form">
     <div>
       <input type="text" placeholder="E-Mail" />
-      <input type="text" placeholder="Password" />
-      <button routerLink="/workspace">Login</button>
+      <input type="password" placeholder="Password" />
+      <button (click)="logInUser()">Login</button>
     </div>
-  </form>
+  </div>
 
   <div class="extern_login_placeholer">
     <div class="line"></div>
@@ -25,6 +31,13 @@
   </div>
 
   <div class="extern_login_buttons">
-    <div class="extern_button"> <img src="assets/img/google_logo.png"> Login with Google</div>
+    <div class="extern_button">
+      <img src="assets/img/google_logo.png" /> Login with Google
+    </div>
+  </div>
+  <div class="extern_login_buttons">
+    <div class="extern_button" routerLink="/workspace">
+      Guest login
+    </div>
   </div>
 </div>
