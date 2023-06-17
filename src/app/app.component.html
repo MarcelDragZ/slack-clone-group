@@ -5,7 +5,9 @@
     <mat-drawer-content><router-outlet></router-outlet>
 
         <mat-drawer mode="side" opened class="profil_app"> 
-            <app-contact-profil></app-contact-profil>
+            <app-contact-profil *ngIf="!ownProfile"></app-contact-profil>
+            <app-own-profil *ngIf="ownProfile"></app-own-profil>
+            <button (click)="toggleOwnUser()">Toggle Ansicht(nur vorübergehend)</button>
         </mat-drawer>
     </mat-drawer-content>
 

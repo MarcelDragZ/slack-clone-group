@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'slack-clone-group';
   link;
+  public ownProfile = true
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -18,7 +19,9 @@ export class AppComponent {
     });
   }
 
-
+  toggleOwnUser(){
+    this.ownProfile = !this.ownProfile
+  }
 
   /* import { Firestore, collection, onSnapshot, addDoc, setDoc, doc } from '@angular/fire/firestore'; // Imports
 

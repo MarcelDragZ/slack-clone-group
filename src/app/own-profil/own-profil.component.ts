@@ -6,17 +6,30 @@ import { SetStatusDialogComponent } from '../set-status-dialog/set-status-dialog
 import { EditContactInformationDialogComponent } from '../edit-contact-information-dialog/edit-contact-information-dialog.component';
 
 @Component({
-  selector: 'app-contact-profil',
-  templateUrl: './contact-profil.component.html',
-  styleUrls: ['./contact-profil.component.scss']
+  selector: 'app-own-profil',
+  templateUrl: './own-profil.component.html',
+  styleUrls: ['./own-profil.component.scss']
 })
-export class ContactProfilComponent {
+export class OwnProfilComponent {
   profileContactOnline = false
+  ownProfile = true
 
   constructor(public dialog: MatDialog) { }
 
-  message() {
-    console.log("message")
-  }// vorübergehend
+  uploadPhoto() {
+    this.dialog.open(UploadPhotoDialogComponent);
+  }
 
+  editProfile() {
+    this.dialog.open(EditProfilDialogComponent);
+  }
+
+  editContactInfo() {
+    this.dialog.open(EditContactInformationDialogComponent);
+  }
+
+  setStatus() {
+    this.dialog.open(SetStatusDialogComponent);
+  }
+  toggleOwnUser() {}
 }

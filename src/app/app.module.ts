@@ -18,7 +18,13 @@ import { ChannelComponent } from './channel/channel.component';
 import { RegisterComponent } from './register/register.component';
 import { ContactProfilComponent } from './contact-profil/contact-profil.component';
 import { MatButtonModule } from '@angular/material/button';
-
+import { UploadPhotoDialogComponent } from './upload-photo-dialog/upload-photo-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditProfilDialogComponent } from './edit-profil-dialog/edit-profil-dialog.component';
+import { SetStatusDialogComponent } from './set-status-dialog/set-status-dialog.component';
+import { EditContactInformationDialogComponent } from './edit-contact-information-dialog/edit-contact-information-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { OwnProfilComponent } from './own-profil/own-profil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +33,12 @@ import { MatButtonModule } from '@angular/material/button';
     LeftSideMenuComponent,
     ChannelComponent,
     RegisterComponent,
-    ContactProfilComponent
+    ContactProfilComponent,
+    UploadPhotoDialogComponent,
+    EditProfilDialogComponent,
+    SetStatusDialogComponent,
+    EditContactInformationDialogComponent,
+    OwnProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +50,9 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

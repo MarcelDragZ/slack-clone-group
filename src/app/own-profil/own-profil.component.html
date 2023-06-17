@@ -11,10 +11,18 @@
         <div class="profile_img_posi">
             <img src="../../assets/img/unknow_user.png">
 
+
+            <button class="edit_own_photo" mat-button (click)="uploadPhoto()">
+                Upload Photo
+            </button>
+
         </div>
         <div>
             <p class="profile_name">
                 <b>John Doe</b>
+                <button mat-button (click)="editProfile()">
+                    Edit
+                </button>
             </p>
             <p>TITLE</p>
             <p class="schedule_position">
@@ -32,29 +40,34 @@
 
         <div class="profile_btn_container">
 
-            <button class="profile_btn" mat-flat-button (click)="message()">
-                Message
-                <mat-icon>chat_bubble_outline</mat-icon>
+            <button class="profile_btn" mat-flat-button (click)="setStatus()">
+                Set a Status
             </button>
 
-
-            <button class="profile_btn" mat-flat-button [matMenuTriggerFor]="huddle">
-                <mat-icon>headset</mat-icon>
-                Huddle
+            <button class="profile_btn" mat-flat-button [matMenuTriggerFor]="viewAsOwnUser">
+                View as
                 <mat-icon>expand_more</mat-icon>
             </button>
-            <mat-menu #huddle="matMenu" xPosition="before">
-                <button mat-menu-item>Start huddle</button>
+            
+            <mat-menu #viewAsOwnUser="matMenu" xPosition="before">
+                <button mat-menu-item>A coworker at (connectet organisation)</button>
+                <button mat-menu-item>A coworker at (connectet organisation)</button>
+                <button mat-menu-item>A contact from other organisation</button>
             </mat-menu>
 
-            <button class="profile_btn" mat-flat-button [matMenuTriggerFor]="focusedUserPointMenu">
+
+            <button class="profile_btn" mat-flat-button *ngIf="ownProfile" [matMenuTriggerFor]="ownUserPointMenu">
                 <mat-icon>more_vert</mat-icon>
             </button>
-            <mat-menu #focusedUserPointMenu="matMenu" xPosition="before">
-                <button mat-menu-item>Copy display name: @Focused User </button>
-                <button mat-menu-item>View files</button>
+            <mat-menu #ownUserPointMenu="matMenu" xPosition="before">
+                <button mat-menu-item>Copy display name: @John Doe </button>
+                <button mat-menu-item>View preferences</button>
+                <button mat-menu-item>Account settings</button>
+                <button mat-menu-item>View your files</button>
+                <button mat-menu-item>Set yourseld away</button>
                 <button mat-menu-item>Copy member ID</button>
             </mat-menu>
+
         </div>
 
     </div>
@@ -62,6 +75,9 @@
     <div class="profile_information_container">
         <p class="contact_information">
             <b>Contact information</b>
+            <button *ngIf="ownProfile" mat-button (click)="editContactInfo()">
+                Edit
+            </button>
         </p>
         <div class="profile_info_container">
             <div class="profile_info">
