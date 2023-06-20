@@ -3,7 +3,6 @@
         <app-left-side-menu></app-left-side-menu>
     </mat-drawer>
     <mat-drawer-content><router-outlet></router-outlet>
-
         <mat-drawer mode="side" opened class="profil_app"> 
             <app-contact-profil *ngIf="!ownProfile"></app-contact-profil>
             <app-own-profil *ngIf="ownProfile"></app-own-profil>
