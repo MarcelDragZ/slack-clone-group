@@ -21,7 +21,7 @@ export class RegisterComponent {
   saltRounds = 10;
   registerUserProgress = false;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) { }
 
   async setNewUser() {
     this.registerUserProgress = true;

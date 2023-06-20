@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
+import { Firestore, collection, doc, getDoc, getDocs, onSnapshot } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { UploadPhotoDialogComponent } from '../upload-photo-dialog/upload-photo-dialog.component';
-import { EditProfilDialogComponent } from '../edit-profil-dialog/edit-profil-dialog.component';
-import { SetStatusDialogComponent } from '../set-status-dialog/set-status-dialog.component';
-import { EditContactInformationDialogComponent } from '../edit-contact-information-dialog/edit-contact-information-dialog.component';
+import { RegisteredUser } from 'src/models/registeredUser.class';
 
 @Component({
   selector: 'app-contact-profil',
@@ -12,11 +10,25 @@ import { EditContactInformationDialogComponent } from '../edit-contact-informati
 })
 export class ContactProfilComponent {
   profileContactOnline = false
+  users: any = new RegisteredUser();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private firestore: Firestore) {
 
-  message() {
+    onSnapshot(collection(this.firestore, 'registeredUsers'), (snapshot) => {
+      let user = snapshot.docs
+        .map((doc) => {
+          let data = doc.data();
+          let id = doc.id;
+          return { id, ...data };
+        })
+      this.users = user;
+      console.log('user data:', this.users);
+    });
+  }
+
+
+  message() {// vorübergehend
     console.log("message")
-  }// vorübergehend
+  }
 
 }

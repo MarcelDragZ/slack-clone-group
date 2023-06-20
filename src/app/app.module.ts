@@ -26,7 +26,8 @@ import { EditContactInformationDialogComponent } from './edit-contact-informatio
 import { MatMenuModule } from '@angular/material/menu';
 import { OwnProfilComponent } from './own-profil/own-profil.component';
 import { FormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule, 
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

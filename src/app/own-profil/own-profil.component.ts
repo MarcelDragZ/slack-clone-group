@@ -13,8 +13,83 @@ import { EditContactInformationDialogComponent } from '../edit-contact-informati
 export class OwnProfilComponent {
   profileContactOnline = false
   ownProfile = true
+  ownUserPointMenuItems = [
+    {
+      text: 'Copy display name: @John Doe ',
+      function: 'copyDisplayName',
+    },
+
+    {
+      text: 'View preferences',
+      function: 'viewPreferences',
+    },
+    {
+      text: 'Account settings',
+      function: 'accountSettings'
+    },
+    {
+      text: 'View your files',
+      function: 'viewYourFiles'
+    },
+    {
+      text: 'Set yourseld away',
+      function: 'setAway'
+    },
+    {
+      text: 'Copy member ID',
+      function: 'copyMemberID'
+    }
+  ]
+
+  // vorübergehend bis die Funktionen implementiert sind
+  viewAsOptions = [
+    {
+      organisation: 'Developer Community',
+      visibility: true
+    },
+    {
+      organisation: 'Developer Akademie',
+      visibility: true
+    },
+    {
+      organisation: 'Developer Hub',
+      visibility: false
+    },
+  ]
+
+
 
   constructor(public dialog: MatDialog) { }
+
+  matMenuRedirection(toTheFunction) {
+    switch (toTheFunction) {
+      case 'copyDisplayName':
+        console.log('copyDisplayName');
+        break;
+      case 'viewPreferences':
+        console.log('viewPreferences');
+        break;
+      case 'accountSettings':
+        console.log('accountSettings');
+        break;
+      case 'viewYourFiles':
+        console.log('viewYourFiles');
+        break;
+      case 'setAway':
+        console.log('setAway');
+        break;
+      case 'copyMemberID':
+        console.log('copyMemberID');
+        break;
+      default:
+        throw 'Invalid action:' + toTheFunction;
+    }
+  }
+
+
+  getVisibilityStatus(viewAs) {
+    console.log('status is:', viewAs);
+  }
 
   uploadPhoto() {
     this.dialog.open(UploadPhotoDialogComponent);
@@ -31,5 +106,5 @@ export class OwnProfilComponent {
   setStatus() {
     this.dialog.open(SetStatusDialogComponent);
   }
-  toggleOwnUser() {}
+  toggleOwnUser() { }
 }

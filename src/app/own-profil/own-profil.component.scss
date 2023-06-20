@@ -3,6 +3,10 @@ a {
     text-decoration: none;
 }
 
+.noMargin {
+    margin: 0 !important;
+}
+
 .profile_header {
     display: flex;
     justify-content: space-between;
@@ -36,8 +40,13 @@ a {
 
 .profile_btn_container {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     padding: 4px;
+}
+
+.small_btn {
+    min-width: 40px;
+    padding: 0;
 }
 
 .profile_btn {
@@ -60,11 +69,15 @@ a {
     align-items: center;
 
     p {
+        padding-left: 8px;
         margin: 0;
         color: rgb(232, 232, 232);
         font-weight: 700;
         line-height: 1.38463;
         font-size: 13px;
+    }
+    a{
+        padding-left: 8px;
     }
 }
 
@@ -111,4 +124,10 @@ a {
 .mat-mdc-unelevated-button.mat-unthemed {
     --mdc-filled-button-container-color: unset !important;
     --mdc-filled-button-label-text-color: #fff;
+}
+
+.icon_bg {
+    padding: 4px;
+    background: #ffffff0d;
+    border-radius: 4px;
 }

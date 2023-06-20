@@ -1,6 +1,27 @@
-<h1 mat-dialog-title>Edit Contact information</h1>
-<input type="text"><br><input type="text"><br><input type="text"><br><input type="text"><br>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button>Save</button>
+<div class="edit_contact_information">
+    <div class="edit_info_header">
+        <h1 mat-dialog-title>Edit Contact information</h1>
+        <button class="small_btn" mat-button mat-dialog-close>
+            <mat-icon class="noMargin">close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-actions class="form_position">
+        <form>
+            <div class="d_flex_column">
+                <p>
+                    <mat-icon>lock</mat-icon>
+                    <b>Email Address</b>
+                </p>
+                <input matInput placeholder="Email@email.de" disabled="" class="mat_input lock_input">
+            </div>
+            <div class="d_flex_column">
+                <p>Phone</p>
+                <input class="mat_input"><br>
+            </div>
+            <div class="edit_btn_container">
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-button>Save Changes</button>
+            </div>
+        </form>
+    </div>
 </div>

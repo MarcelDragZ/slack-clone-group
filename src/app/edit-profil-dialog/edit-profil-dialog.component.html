@@ -1,6 +1,45 @@
-<h1 mat-dialog-title>Edit your profile</h1>
-<input type="text"><br><input type="text"><br><input type="text"><br><input type="text"><br>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button>Save</button>
+<div class="edit_profil_main_container">
+    <h1 mat-dialog-title>Edit your profile</h1>
+    <div class="form_container">
+        <form>
+            <div mat-dialog-actions class="form_position">
+                <div>
+                    <div>
+                        <p>Full name</p>
+                        <input matInput class="mat_input">
+                    </div>
+                    <div class="d_flex_column">
+                        <p>Display name</p>
+                        <input class="mat_input"><br>
+                        <span> This could be your first name, or a nickname — however you’d like people
+                            to refer to you in Slack.</span>
+                    </div>
+                    <div class="d_flex_column">
+                        <p>Title</p>
+                        <input class="mat_input"><br>
+                        <span>Let people know what you do at Developer Akademie.</span>
+                    </div>
+                </div>
+                <div class="profile_img_posi">
+                    <p>Profile photo</p>
+                    <img src="../../assets/img/unknow_user.png">
+                    <button class="edit_own_photo" mat-button (click)="uploadPhoto()">
+                        Upload Photo
+                    </button>
+                </div>
+                <div class="d_flex_column">
+                    <p>Time zone</p>
+                    <input class="mat_input"><br>
+                    <span>Your current time zone. Used to send summary and notification emails, for times in your
+                        activity feeds, and for reminders.
+                    </span>
+                </div>
+                <div class="edit_btn_container">
+                    <button mat-button mat-dialog-close>Cancel</button>
+                    <button mat-button>Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
