@@ -6,14 +6,10 @@
     <app-left-side-menu></app-left-side-menu>
   </mat-drawer>
   <mat-drawer-content>
-
     <router-outlet></router-outlet>
-
-
-
   </mat-drawer-content>
 </mat-drawer-container>
-<mat-drawer mode="side" opened position="end" class="profil_app">
+<mat-drawer *ngIf="link == '/workspace'" mode="side" opened position="end" class="profil_app">
   <app-contact-profil></app-contact-profil>
 </mat-drawer>
 <router-outlet *ngIf="link == '/' || link == '/register'"></router-outlet>
