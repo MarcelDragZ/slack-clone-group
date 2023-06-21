@@ -6,30 +6,30 @@
                 <div>
                     <div>
                         <p>Full name</p>
-                        <input matInput class="mat_input">
+                        <input matInput class="mat_input" [value]="data.currentUser.fullName">
                     </div>
                     <div class="d_flex_column">
                         <p>Display name</p>
-                        <input class="mat_input"><br>
+                        <input class="mat_input" [value]="data.currentUser.displayName"><br>
                         <span> This could be your first name, or a nickname — however you’d like people
                             to refer to you in Slack.</span>
                     </div>
                     <div class="d_flex_column">
                         <p>Title</p>
-                        <input class="mat_input"><br>
+                        <input class="mat_input" [value]="data.currentUser.title"><br>
                         <span>Let people know what you do at Developer Akademie.</span>
                     </div>
                 </div>
                 <div class="profile_img_posi">
                     <p>Profile photo</p>
-                    <img src="../../assets/img/unknow_user.png">
+                    <img src="../../assets/img/{{data.currentUser.profilePicture}}">
                     <button class="edit_own_photo" mat-button (click)="uploadPhoto()">
                         Upload Photo
                     </button>
                 </div>
                 <div class="d_flex_column">
                     <p>Time zone</p>
-                    <input class="mat_input"><br>
+                    <input class="mat_input" [value]="data.currentUser.location"><br>
                     <span>Your current time zone. Used to send summary and notification emails, for times in your
                         activity feeds, and for reminders.
                     </span>

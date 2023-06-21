@@ -8,23 +8,32 @@
     <div class="profile_center_container">
         <div class="profile_img_posi">
             <img src="../../assets/img/unknow_user.png">
+            <button *ngIf="ownProfile" class="edit_own_photo" mat-button (click)="uploadPhoto()">
+                Upload Photo
+            </button>
         </div>
+
         <div>
             <p class="profile_name">
-                <b>John Doe</b>
+                <b>{{currentUser.displayName}}</b>
+                <button *ngIf="ownProfile" mat-button (click)="editProfile()">
+                    Edit
+                </button>
             </p>
-            <p>TITLE</p>
+            <p>{{currentUser.title}}</p>
             <p class="schedule_position">
-                <mat-icon [ngClass]="profileContactOnline ? 'green-icon' : 'white'">online_prediction</mat-icon>
-                Away<br>
+                <mat-icon [ngClass]="currentUser.onlineStatus ? 'green-icon' : 'white'">online_prediction</mat-icon>
+                <span>{{currentUser.onlineStatus ? 'Active' : 'Away'}}</span><br>
             </p>
         </div>
+
         <p class="schedule_position">
             <mat-icon>schedule</mat-icon>
             <!-- die uhrzeit vom user der gerade focusiert wird -->
             00.00 AM/PM local time
         </p>
-        <div class="profile_btn_container">
+
+        <div *ngIf="!ownProfile" class="profile_btn_container">
             <button class="profile_btn" mat-flat-button (click)="message()">
                 Message
                 <mat-icon>chat_bubble_outline</mat-icon>
@@ -46,17 +55,48 @@
                 <button mat-menu-item>Copy member ID</button>
             </mat-menu>
         </div>
+
+        <div *ngIf="ownProfile" class="profile_btn_container">
+            <button class="profile_btn" mat-flat-button (click)="setStatus()">
+                Set a Status
+            </button>
+            <button class="profile_btn" mat-flat-button [matMenuTriggerFor]="viewAsOwnUser">
+                View as
+                <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #viewAsOwnUser="matMenu" xPosition="before">
+                <button mat-menu-item *ngFor="let organisation of currentUser.organisations"
+                    (click)="getVisibilityStatus(organisation.visibility)">
+                    A coworker at
+                    {{organisation.name}}
+                </button>
+                <button mat-menu-item>A contact from other organisation</button>
+            </mat-menu>
+            <button class="profile_btn small_btn" mat-flat-button [matMenuTriggerFor]="ownUserPointMenu">
+                <mat-icon class="noMargin">more_vert</mat-icon>
+            </button>
+            <mat-menu #ownUserPointMenu="matMenu" xPosition="before">
+                <button mat-menu-item *ngFor="let matMenuBtn of ownUserPointMenuItems"
+                    (click)="matMenuRedirection(matMenuBtn.function)">
+                    {{matMenuBtn.text}}
+                </button>
+            </mat-menu>
+        </div>
+
     </div>
     <div class="profile_information_container">
         <p class="contact_information">
             <b>Contact information</b>
+            <button *ngIf="ownProfile" mat-button (click)="editContactInfo()">
+                Edit
+            </button>
         </p>
         <div class="profile_info_container">
             <div class="profile_info">
                 <mat-icon class="icon_bg">email</mat-icon>
                 <div>
                     <p>Email Address</p>
-                    <a href="mailto:abc@dada.de">dadada@da.de</a>
+                    <a href="mailto:{{currentUser.email}}">{{currentUser.email}}</a>
                 </div>
             </div>
             <br>
@@ -64,8 +104,21 @@
                 <mat-icon class="icon_bg">phone</mat-icon>
                 <div>
                     <p>Phone number</p>
-                    <a href="tel:0173 6369654">0173 6369654</a>
+                    <a href="tel:{{currentUser.phone}}">{{currentUser.phone}}</a>
                 </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                Current user is: <b>{{currentUser.displayName}}</b><br>
+                <p>Login As: <b>{{currentUser.id}}</b> <br>
+                    <button *ngFor="let user of users" (click)="fakeLogin(user.id)">{{user.id}}</button>
+                </p>
+            </div>
+            <div>
+                <p>Click on <br>
+                    <button *ngFor="let user of users" (click)="getUserProfil(user.id)">{{user.id}}</button>
+                </p>
             </div>
         </div>
     </div>
