@@ -16,7 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ChannelComponent } from './channel/channel.component';
 import { RegisterComponent } from './register/register.component';
-import { ContactProfilComponent } from './contact-profil/contact-profil.component';
+import { ContactProfileComponent } from './contact-profile/contact-profile.component';
 import { MatButtonModule } from '@angular/material/button';
 import { UploadPhotoDialogComponent } from './upload-photo-dialog/upload-photo-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -24,7 +24,6 @@ import { EditProfilDialogComponent } from './edit-profil-dialog/edit-profil-dial
 import { SetStatusDialogComponent } from './set-status-dialog/set-status-dialog.component';
 import { EditContactInformationDialogComponent } from './edit-contact-information-dialog/edit-contact-information-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { OwnProfilComponent } from './own-profil/own-profil.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,12 +36,11 @@ import { MatInputModule } from '@angular/material/input';
     LeftSideMenuComponent,
     ChannelComponent,
     RegisterComponent,
-    ContactProfilComponent,
+    ContactProfileComponent,
     UploadPhotoDialogComponent,
     EditProfilDialogComponent,
     SetStatusDialogComponent,
     EditContactInformationDialogComponent,
-    OwnProfilComponent
   ],
   imports: [
     BrowserModule,

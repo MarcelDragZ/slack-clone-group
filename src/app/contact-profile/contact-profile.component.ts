@@ -9,11 +9,11 @@ import { EditContactInformationDialogComponent } from '../edit-contact-informati
 
 
 @Component({
-  selector: 'app-contact-profil',
-  templateUrl: './contact-profil.component.html',
-  styleUrls: ['./contact-profil.component.scss']
+  selector: 'app-contact-profile',
+  templateUrl: './contact-profile.component.html',
+  styleUrls: ['./contact-profile.component.scss']
 })
-export class ContactProfilComponent {
+export class ContactProfileComponent {
   ownUserPointMenuItems = [
     {
       text: 'Copy display name:',
@@ -69,15 +69,13 @@ export class ContactProfilComponent {
           }
         ],
       onlineStatus: true,
-      //TODO : 
       userStatus: 'working remotely',
       location: 'Germany',
     }
 
-  profileContactOnline = false
-  users: any = new RegisteredUser();
   public ownProfile = false
-  testa: any;
+  profileContactOnline = false
+  users: any[] = [];
   constructor(public dialog: MatDialog, public firestore: Firestore) {
 
     onSnapshot(collection(this.firestore, 'registeredUsers'), (snapshot) => {
@@ -91,14 +89,18 @@ export class ContactProfilComponent {
       console.log('user data:', this.users);
       console.log('user data:', this.currentUser.id);
     });
+
+
+
   }
+
 
   fakeLogin(id) {
     let existingUser = this.users.find(profil => profil.id === id);
     console.log(existingUser);
     this.currentUser = existingUser
     console.log('currentUser is :', this.currentUser);
-    this.ownProfile = false    
+    this.ownProfile = false
   }
 
 
