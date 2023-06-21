@@ -1,6 +1,7 @@
 export class RegisteredUser {
   email: string;
   password: string;
+  privateChannels: object;
 
   //Die namen sind noch nicht final und können geändert werden
   fullName: string;
@@ -17,6 +18,7 @@ export class RegisteredUser {
   constructor(obj?: any) {
     this.email = obj ? obj.email : '';
     this.password = obj ? obj.password : '';
+    this.privateChannels = obj ? obj.privateChannels : '';
 
     //
     this.fullName = obj ? obj.fullName : '';
@@ -34,6 +36,7 @@ export class RegisteredUser {
     return {
       email: this.email,
       password: this.password,
+      privateChannels: this.privateChannels,
 
       //
       fullName: this.fullName,

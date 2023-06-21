@@ -32,6 +32,7 @@ export class RegisterComponent {
       this.registerUserProgress = false;
       this.user.email = '';
       this.user.password = '';
+      this.user.privateChannels = '';
     } catch (error) {
       console.error('Error hashing password: ', error);
       this.registerUserProgress = false;
