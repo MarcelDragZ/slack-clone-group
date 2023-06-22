@@ -1,16 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CreateChannelDialogComponent } from '../create-channel-dialog/create-channel-dialog.component';
 
 @Component({
   selector: 'app-left-side-menu',
   templateUrl: './left-side-menu.component.html',
-  styleUrls: ['./left-side-menu.component.scss']
+  styleUrls: ['./left-side-menu.component.scss'],
 })
-export class LeftSideMenuComponent {
+export class LeftSideMenuComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   channels$: Observable<any>;
   channels: Array<any>;
@@ -18,26 +18,34 @@ export class LeftSideMenuComponent {
   currentChannel;
   link;
 
-  constructor(private router: Router, public dialog: MatDialog) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
     this.router.events.subscribe((event) => {
-      if (event['url']) {
-        this.link = event['url'];
+      if (event instanceof NavigationEnd) {
+        let currentUrl = event.urlAfterRedirects;
+        let channel = currentUrl.split('/channel/')[1];
+        console.log('Channel:', channel);
+        this.currentChannel = channel;
       }
     });
-    const itemCollection = collection(this.firestore, 'channel');
-    this.channels$ = collectionData(itemCollection, { idField: 'id' })
+    let itemCollection = collection(this.firestore, 'channel');
+    this.channels$ = collectionData(itemCollection, { idField: 'id' });
     this.channels$.subscribe((newChannels) => {
       this.channels = newChannels;
-      console.log(this.channels)
-    })
+      console.log(this.channels);
+    });
   }
 
   openDialog() {
-    this.dialog.open(CreateChannelDialogComponent)
+    this.dialog.open(CreateChannelDialogComponent);
   }
 
   // changeCurrentChannel(id) {
   //   this.currentChannel = id;
   // }
-
 }
