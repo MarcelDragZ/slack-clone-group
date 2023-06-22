@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-
 export interface DialogData {
   currentUser: any;
 }
@@ -10,14 +9,14 @@ export interface DialogData {
 @Component({
   selector: 'app-edit-contact-information-dialog',
   templateUrl: './edit-contact-information-dialog.component.html',
-  styleUrls: ['./edit-contact-information-dialog.component.scss']
+  styleUrls: ['./edit-contact-information-dialog.component.scss'],
 })
-
 export class EditContactInformationDialogComponent {
-  constructor(public firestore: AngularFirestore,
+  constructor(
+    public firestore: AngularFirestore,
     public dialogRef: MatDialogRef<EditContactInformationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) {}
 
   saveChanges() {
     this.firestore
@@ -28,7 +27,7 @@ export class EditContactInformationDialogComponent {
         this.dialogRef.close();
       })
       .catch((error) => {
-        console.error("Error updating document: ", error);
+        console.error('Error updating document: ', error);
       });
   }
 }

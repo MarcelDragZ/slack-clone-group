@@ -27,8 +27,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateChannelDialogComponent } from './create-channel-dialog/create-channel-dialog.component';
-import { MessagePanelComponent } from './message-panel/message-panel.component';
 import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagePanelComponent } from './message-panel/message-panel.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +44,8 @@ import { MessageInputComponent } from './message-input/message-input.component';
     SetStatusDialogComponent,
     EditContactInformationDialogComponent,
     CreateChannelDialogComponent,
-    MessagePanelComponent,
     MessageInputComponent,
+    MessagePanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +63,7 @@ import { MessageInputComponent } from './message-input/message-input.component';
     MatDialogModule,
     MatMenuModule,
     MatInputModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

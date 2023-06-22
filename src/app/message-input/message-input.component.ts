@@ -1,8 +1,10 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-message-panel',
+  selector: 'app-message-input',
   templateUrl: './message-input.component.html',
-  styleUrls: ['./message-input.component.scss'],
+  styleUrls: ['./message-input.component.scss']
 })
-export class MessageInputComponent {}
+export class MessageInputComponent {
+
+}
