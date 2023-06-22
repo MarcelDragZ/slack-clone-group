@@ -16,7 +16,8 @@
             </div>
             <div class="d_flex_column">
                 <p>Phone</p>
-                <input class="mat_input"><br>
+                <input *ngIf="data.currentUser.phone" [value]="data.currentUser.phone" class="mat_input"><br *ngIf="data.currentUser.phone">
+                <input *ngIf="!data.currentUser.phone" placeholder="Enter your Phonenumber" class="mat_input"><br *ngIf="!data.currentUser.phone">
             </div>
             <div class="edit_btn_container">
                 <button mat-button mat-dialog-close>Cancel</button>
