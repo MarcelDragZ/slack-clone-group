@@ -59,6 +59,7 @@ import { CreateChannelDialogComponent } from './create-channel-dialog/create-cha
     MatDialogModule,
     MatMenuModule,
     MatInputModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
