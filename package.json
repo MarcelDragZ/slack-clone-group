@@ -23,6 +23,7 @@
     "@angular/router": "^16.0.0",
     "bcryptjs": "^2.4.3",
     "firebase": "^9.22.2",
+    "ngx-quill": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
