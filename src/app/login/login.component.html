@@ -18,8 +18,8 @@
 
   <div class="form">
     <div>
-      <input type="text" placeholder="E-Mail" />
-      <input type="password" placeholder="Password" />
+      <input [(ngModel)]="email" type="text" placeholder="E-Mail" />
+      <input [(ngModel)]="password" type="password" placeholder="Password" />
       <button (click)="logInUser()">Login</button>
     </div>
   </div>
@@ -31,13 +31,11 @@
   </div>
 
   <div class="extern_login_buttons">
-    <div class="extern_button">
+    <div (click)="loginWithGoogle()" class="extern_button">
       <img src="assets/img/google_logo.png" /> Login with Google
     </div>
   </div>
   <div class="extern_login_buttons">
-    <div class="extern_button" routerLink="/workspace">
-      Guest login
-    </div>
+    <div class="extern_button" routerLink="/workspace">Guest login</div>
   </div>
 </div>
