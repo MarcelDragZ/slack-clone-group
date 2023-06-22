@@ -12,7 +12,7 @@
       </div> 
     </div>
   <div *ngIf="channelOpen" class="channels">
-      <a class="hovercolor" [ngClass]="{'current-channel' : currentChannel == channel.id}" *ngFor="let channel of channels" [routerLink]="['/workspace/channel/' + channel.id]" >
+      <a class="hovercolor" [ngClass]="{'current-channel' : link == '/workspace/channel/'+channel.id}" *ngFor="let channel of channels" [routerLink]="['/workspace/channel/' + channel.id]" >
          <span>#</span> {{ channel.channelName }}
       </a>
   </div>

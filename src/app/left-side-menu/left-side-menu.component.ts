@@ -18,16 +18,11 @@ export class LeftSideMenuComponent {
   currentChannel;
   link;
 
-  constructor(private router: Router, public dialog: MatDialog, private route: ActivatedRoute) {
+  constructor(private router: Router, public dialog: MatDialog) {
     this.router.events.subscribe((event) => {
       if (event['url']) {
         this.link = event['url'];
-        console.log(event)
       }
-    });
-    this.route.paramMap.subscribe(paramMap => {
-      this.currentChannel = paramMap.get('id');
-      console.log(paramMap.get('id'))
     });
     const itemCollection = collection(this.firestore, 'channel');
     this.channels$ = collectionData(itemCollection, { idField: 'id' })
