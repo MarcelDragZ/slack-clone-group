@@ -7,7 +7,7 @@
     </div>
     <div class="profile_center_container">
         <div class="profile_img_posi">
-            <img src="../../assets/img/{{currentUser.profilePicture ? currentUser.profilePicture : 'unknow_user.png'}}">
+            <img src="../../assets/img/unknow_user.png">
             <button *ngIf="ownProfile" class="edit_own_photo" mat-button (click)="uploadPhoto()">
                 Upload Photo
             </button>
@@ -15,7 +15,7 @@
 
         <div>
             <p class="profile_name">
-                <b>{{currentUser.displayName ? currentUser.displayName : 'Set your display name'}}</b>
+                <b>{{currentUser.displayName}}</b>
                 <button *ngIf="ownProfile" mat-button (click)="editProfile()">
                     Edit
                 </button>
@@ -96,7 +96,7 @@
                 <mat-icon class="icon_bg">email</mat-icon>
                 <div>
                     <p>Email Address</p>
-                    <a *ngIf="currentUser.email" href="mailto:{{currentUser.email}}">{{currentUser.email}}</a>
+                    <a href="mailto:{{currentUser.email}}">{{currentUser.email}}</a>
                 </div>
             </div>
             <br>
@@ -104,8 +104,7 @@
                 <mat-icon class="icon_bg">phone</mat-icon>
                 <div>
                     <p>Phone number</p>
-                    <a *ngIf="currentUser.phone" href="tel:{{currentUser.phone}}">{{currentUser.phone}}</a>
-                    <a *ngIf="ownProfile && !currentUser.phone" (click)="editContactInfo()">Add Phone</a>
+                    <a href="tel:{{currentUser.phone}}">{{currentUser.phone}}</a>
                 </div>
             </div>
         </div>

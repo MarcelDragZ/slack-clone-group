@@ -42,11 +42,11 @@ export class ContactProfileComponent {
     }
   ]
 
+
   public currentUser =
     {
       email: 'Max@mustermann.de',
       password: '123456',
-      privateChannels: '',
       id: '1',
       fullName: 'Max Mustermann',
       displayName: 'Max Muster Mann',
@@ -74,8 +74,8 @@ export class ContactProfileComponent {
     }
 
   public ownProfile = false
+  profileContactOnline = false
   users: any[] = [];
-
   constructor(public dialog: MatDialog, public firestore: Firestore) {
 
     onSnapshot(collection(this.firestore, 'registeredUsers'), (snapshot) => {
@@ -89,8 +89,11 @@ export class ContactProfileComponent {
       console.log('user data:', this.users);
       console.log('user data:', this.currentUser.id);
     });
+
+
+
   }
-  
+
 
   fakeLogin(id) {
     let existingUser = this.users.find(profil => profil.id === id);
@@ -150,10 +153,7 @@ export class ContactProfileComponent {
   }
 
   editContactInfo() {
-    this.dialog.open(EditContactInformationDialogComponent,
-      {
-        data: { currentUser: this.currentUser }
-      });
+    this.dialog.open(EditContactInformationDialogComponent);
   }
 
   setStatus() {

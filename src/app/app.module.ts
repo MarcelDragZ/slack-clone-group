@@ -27,9 +27,6 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateChannelDialogComponent } from './create-channel-dialog/create-channel-dialog.component';
-import { MessageInputComponent } from './message-input/message-input.component';
-import { MessagePanelComponent } from './message-panel/message-panel.component';
-import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -45,12 +42,9 @@ import { QuillModule } from 'ngx-quill';
     SetStatusDialogComponent,
     EditContactInformationDialogComponent,
     CreateChannelDialogComponent,
-    MessageInputComponent,
-    MessagePanelComponent,
   ],
   imports: [
     BrowserModule,
-    QuillModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     MatFormFieldModule,

@@ -6,34 +6,23 @@
                 <div>
                     <div>
                         <p>Full name</p>
-                        <input class="mat_input" *ngIf="data.currentUser.fullName" [value]="data.currentUser.fullName">
-                        <input class="mat_input" *ngIf="!data.currentUser.fullName" placeholder="Enter your full name">
+                        <input matInput class="mat_input" [value]="data.currentUser.fullName">
                     </div>
                     <div class="d_flex_column">
                         <p>Display name</p>
-
-                        <input class="mat_input" *ngIf="data.currentUser.displayName"
-                            [value]="data.currentUser.displayName"><br *ngIf="data.currentUser.displayName">
-
-                        <input class="mat_input" *ngIf="!data.currentUser.displayName"
-                            placeholder="Enter your display name"><br *ngIf="!data.currentUser.displayName">
-
+                        <input class="mat_input" [value]="data.currentUser.displayName"><br>
                         <span> This could be your first name, or a nickname — however you’d like people
                             to refer to you in Slack.</span>
                     </div>
                     <div class="d_flex_column">
                         <p>Title</p>
-                        <input class="mat_input" *ngIf="data.currentUser.title" [value]="data.currentUser.title"><br
-                            *ngIf="data.currentUser.title">
-                        <input class="mat_input" *ngIf="!data.currentUser.title" placeholder="Enter your title"><br
-                            *ngIf="!data.currentUser.title">
-                        <span>Let people know what you do at Developer Akademie.</span><!-- TODO -->
+                        <input class="mat_input" [value]="data.currentUser.title"><br>
+                        <span>Let people know what you do at Developer Akademie.</span>
                     </div>
                 </div>
                 <div class="profile_img_posi">
                     <p>Profile photo</p>
-                    <img
-                        src="../../assets/img/{{data.currentUser.profilePicture ? data.currentUser.profilePicture :'unknow_user.png'}}">
+                    <img src="../../assets/img/{{data.currentUser.profilePicture}}">
                     <button class="edit_own_photo" mat-button (click)="uploadPhoto()">
                         Upload Photo
                     </button>
@@ -47,7 +36,7 @@
                 </div>
                 <div class="edit_btn_container">
                     <button mat-button mat-dialog-close>Cancel</button>
-                    <button mat-button (click)="setUser(data.currentUser.id)" >Save Changes</button>
+                    <button mat-button>Save Changes</button>
                 </div>
             </div>
         </form>
