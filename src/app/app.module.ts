@@ -27,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CreateChannelDialogComponent } from './create-channel-dialog/create-channel-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatInputModule } from '@angular/material/input';
     EditProfilDialogComponent,
     SetStatusDialogComponent,
     EditContactInformationDialogComponent,
+    CreateChannelDialogComponent,
   ],
   imports: [
     BrowserModule,

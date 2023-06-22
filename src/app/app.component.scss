@@ -2,11 +2,16 @@
     height: 100svh;
     display: flex;
     flex-direction: column;
+
+    mat-drawer {
+        background: #222629;
+    }
+
 }
 
 
 .profil_app {
     right: 0;
     width: 350px;
-    background:#1a1d21;
+    background: #1a1d21;
 }

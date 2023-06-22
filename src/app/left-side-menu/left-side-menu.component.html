@@ -1,11 +1,19 @@
 <div class="content" *ngIf="link != '/'">
-  <h2>Slack Clone</h2>
+  <h2 routerLink="/workspace">Slack Clone</h2>
   <div class="channel-menu">
       <mat-icon *ngIf="channelOpen" (click)="channelOpen = false">expand_less</mat-icon>
-      <mat-icon *ngIf="!channelOpen" (click)="channelOpen = true">expand_more</mat-icon> Channels</div>
+      <mat-icon *ngIf="!channelOpen" (click)="channelOpen = true">expand_more</mat-icon>
+      <div class="channel-creation-menu hovercolor" [matMenuTriggerFor]="menu">
+        Channels <mat-icon>expand_more</mat-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog()">Erstellen</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
+      </div> 
+    </div>
   <div *ngIf="channelOpen" class="channels">
-      <a *ngFor="let channel of channels" [routerLink]="['/workspace/channel/' + channel.id]">
-          {{ channel.channelName }}
+      <a class="hovercolor" [ngClass]="{'current-channel' : currentChannel == channel.id}" *ngFor="let channel of channels" [routerLink]="['/workspace/channel/' + channel.id]" >
+         <span>#</span> {{ channel.channelName }}
       </a>
   </div>
   </div>

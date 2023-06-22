@@ -1,6 +1,10 @@
 .content {
     min-width: 15vw;
-    padding: 15px;
+    padding: 8px;
+
+    h2{
+        cursor: pointer;
+    }
 }
 
 .channel-menu {
@@ -12,15 +16,44 @@
     display: flex;
     flex-direction: column;
     
+    
 
     a {
+        padding: 5px 10px;
         cursor: pointer;
         transition: all ease-in-out 175ms;
         text-decoration: none;
         color: white;
-        &:hover {
-            color: lightgrey;
+        border-radius: 6px;
+        
+    }
+}
 
+.channel-creation-menu {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px 5px;
+    border-radius: 6px;
+
+    mat-icon {
+        opacity: 0;
+    }
+
+    &:hover {
+        mat-icon {
+            opacity: 1;
         }
     }
+
+}
+
+.hovercolor {
+    &:hover {
+        background-color: #2C3136;
+    }
+}
+
+.current-channel {
+    background-color: #D39B46;
 }
