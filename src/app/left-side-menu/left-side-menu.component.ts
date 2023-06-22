@@ -31,7 +31,6 @@ export class LeftSideMenuComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         let currentUrl = event.urlAfterRedirects;
         let channel = currentUrl.split('/channel/')[1];
-        console.log('Channel:', channel);
         this.currentChannel = channel;
         this.getCurrentChannel()
       }
@@ -40,7 +39,6 @@ export class LeftSideMenuComponent implements OnInit {
     this.channels$ = collectionData(itemCollection, { idField: 'id' });
     this.channels$.subscribe((newChannels) => {
       this.channels = newChannels;
-      console.log(this.channels);
     });
   }
 
@@ -52,7 +50,6 @@ export class LeftSideMenuComponent implements OnInit {
     let firebaseDoc = doc(this.firestore, `channel/${this.currentChannel}`);
     docData(firebaseDoc).subscribe((currentChannel) => {
       this.showChannelIfClosed = currentChannel;
-      console.log(currentChannel)
     })
   }
 
