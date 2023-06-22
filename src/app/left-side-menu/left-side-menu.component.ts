@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, docData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CreateChannelDialogComponent } from '../create-channel-dialog/create-channel-dialog.component';
+import { doc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-left-side-menu',
@@ -16,6 +17,7 @@ export class LeftSideMenuComponent implements OnInit {
   channels: Array<any>;
   channelOpen = true;
   currentChannel;
+  showChannelIfClosed;
   link;
 
   constructor(
@@ -31,6 +33,7 @@ export class LeftSideMenuComponent implements OnInit {
         let channel = currentUrl.split('/channel/')[1];
         console.log('Channel:', channel);
         this.currentChannel = channel;
+        this.getCurrentChannel()
       }
     });
     let itemCollection = collection(this.firestore, 'channel');
@@ -45,7 +48,13 @@ export class LeftSideMenuComponent implements OnInit {
     this.dialog.open(CreateChannelDialogComponent);
   }
 
-  // changeCurrentChannel(id) {
-  //   this.currentChannel = id;
-  // }
+  getCurrentChannel() {
+    let firebaseDoc = doc(this.firestore, `channel/${this.currentChannel}`);
+    docData(firebaseDoc).subscribe((currentChannel) => {
+      this.showChannelIfClosed = currentChannel;
+      console.log(currentChannel)
+    })
+  }
+
+  
 }
