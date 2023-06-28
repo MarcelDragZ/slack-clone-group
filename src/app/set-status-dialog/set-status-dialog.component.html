@@ -1,34 +1,43 @@
 <div class="get_status_container">
-    <div class="edit_status_header">
-        <h1 mat-dialog-title>Set a status</h1>
-        <button class="small_btn" mat-button mat-dialog-close>
-            <mat-icon class="noMargin">close</mat-icon>
+  <div class="edit_status_header">
+    <h1 mat-dialog-title>Set a status</h1>
+    <button class="small_btn" mat-button mat-dialog-close>
+      <mat-icon class="noMargin">close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-actions class="form_position">
+    <form [formGroup]="form" (ngSubmit)="form.valid && saveChanges()" ngNativeValidate>
+
+
+
+        <div class="mat_input" *ngIf="selectedStatus">
+          <input class="input_in_div" matInput formControlName="userStatus" [value]="value"
+            placeholder="What's your status?">
+          <button *ngIf="value" mat-icon-button aria-label="Clear" (click)="value = ''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+   
+
+
+      <div *ngIf="!selectedStatus" class="d_flex_column">
+
+        <button class="button_select" mat-button *ngFor="let status of userStatus"
+          [class.selected]="selectedStatus === status.function" (click)="setUserStatus(status)">
+          <div>
+            {{status.text}}
+            <p>&nbsp;- {{status.removeTimer}}</p>
+          </div>
         </button>
-    </div>
-    <div mat-dialog-actions class="form_position">
-        <form>
-            <input matInput placeholder="What's your status?" class="mat_input">
-            <div class="d_flex_column">
-                <button mat-button>
-                    <p>a</p>
-                </button>
-                <button mat-button>
-                    <p>a</p>
-                </button>
-                <button mat-button>
-                    <p>a</p>
-                </button>
-                <button mat-button>
-                    <p>a</p>
-                </button>
-                <button mat-button>
-                    <p>a</p>
-                </button>
-            </div>
-            <div class="edit_btn_container">
-                <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button disabled="">Save Changes</button>
-            </div>
-        </form>
-    </div>
+      </div>
+
+      <div class="edit_btn_container">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [disabled]="!selectedStatus">Save</button>
+      </div>
+
+    </form>
+
+
+  </div>
 </div>

@@ -7,32 +7,32 @@
     </div>
     <div class="profile_center_container">
         <div class="profile_img_posi">
-            <img src="../../assets/img/{{currentUser.profilePicture ? currentUser.profilePicture : 'unknow_user.png'}}">
+            <img
+                src="../../assets/img/{{renderUserData.profilePicture ? renderUserData.profilePicture : 'unknow_user.png'}}">
             <button *ngIf="ownProfile" class="edit_own_photo" mat-button (click)="uploadPhoto()">
                 Upload Photo
             </button>
-        </div>
-
+        </div>        
         <div>
             <p class="profile_name">
-                <b>{{currentUser.displayName ? currentUser.displayName : 'Set your display name'}}</b>
+                <b *ngIf="!ownProfile || ownProfile && renderUserData.displayName">
+                    {{renderUserData.displayName ? renderUserData.displayName : 'New here'}}
+                </b>
+                <a *ngIf="ownProfile && !renderUserData.displayName" (click)="editProfile()">Add display name</a>
                 <button *ngIf="ownProfile" mat-button (click)="editProfile()">
                     Edit
                 </button>
             </p>
-            <p>{{currentUser.title}}</p>
+            <p>{{renderUserData.title}}</p>
             <p class="schedule_position">
-                <mat-icon [ngClass]="currentUser.onlineStatus ? 'green-icon' : 'white'">online_prediction</mat-icon>
-                <span>{{currentUser.onlineStatus ? 'Active' : 'Away'}}</span><br>
+                <mat-icon [ngClass]="renderUserData.onlineStatus ? 'green-icon' : 'white'">online_prediction</mat-icon>
+                <span>{{renderUserData.onlineStatus ? 'Active' : 'Away'}}</span><br>
             </p>
         </div>
-
         <p class="schedule_position">
             <mat-icon>schedule</mat-icon>
-            <!-- die uhrzeit vom user der gerade focusiert wird -->
-            00.00 AM/PM local time
+            {{ currentTime }} local time
         </p>
-
         <div *ngIf="!ownProfile" class="profile_btn_container">
             <button class="profile_btn" mat-flat-button (click)="message()">
                 Message
@@ -50,12 +50,12 @@
                 <mat-icon class="noMargin">more_vert</mat-icon>
             </button>
             <mat-menu #focusedUserPointMenu="matMenu" xPosition="before">
-                <button mat-menu-item>Copy display name: @Focused User </button>
+                <button mat-menu-item (click)="matMenuRedirection('copyDisplayName')">Copy display name:
+                    @{{renderUserData.displayName}} </button>
                 <button mat-menu-item>View files</button>
-                <button mat-menu-item>Copy member ID</button>
+                <button mat-menu-item (click)="matMenuRedirection('copyMemberID')">Copy member ID</button>
             </mat-menu>
         </div>
-
         <div *ngIf="ownProfile" class="profile_btn_container">
             <button class="profile_btn" mat-flat-button (click)="setStatus()">
                 Set a Status
@@ -65,7 +65,7 @@
                 <mat-icon>expand_more</mat-icon>
             </button>
             <mat-menu #viewAsOwnUser="matMenu" xPosition="before">
-                <button mat-menu-item *ngFor="let organisation of currentUser.organisations"
+                <button mat-menu-item *ngFor="let organisation of renderUserData.organisations"
                     (click)="getVisibilityStatus(organisation.visibility)">
                     A coworker at
                     {{organisation.name}}
@@ -78,11 +78,14 @@
             <mat-menu #ownUserPointMenu="matMenu" xPosition="before">
                 <button mat-menu-item *ngFor="let matMenuBtn of ownUserPointMenuItems"
                     (click)="matMenuRedirection(matMenuBtn.function)">
-                    {{matMenuBtn.text}}
+                    {{ matMenuBtn.function === 'setAway' ? getSetStatusText() : matMenuBtn.text
+                    && matMenuBtn.function === 'copyDisplayName' ? 'Copy display name: @' + renderUserData.displayName :
+                    matMenuBtn.text
+                    && matMenuBtn.function === 'copyMemberId' ? 'Copy member ID: ' : matMenuBtn.text
+                    }}
                 </button>
             </mat-menu>
         </div>
-
     </div>
     <div class="profile_information_container">
         <p class="contact_information">
@@ -96,16 +99,17 @@
                 <mat-icon class="icon_bg">email</mat-icon>
                 <div>
                     <p>Email Address</p>
-                    <a *ngIf="currentUser.email" href="mailto:{{currentUser.email}}">{{currentUser.email}}</a>
+                    <a *ngIf="renderUserData.email" href="mailto:{{renderUserData.email}}">{{renderUserData.email}}</a>
                 </div>
             </div>
             <br>
-            <div class="profile_info">
+            <div *ngIf="ownProfile || !ownProfile && renderUserData.phone"
+                class="profile_info">
                 <mat-icon class="icon_bg">phone</mat-icon>
                 <div>
                     <p>Phone number</p>
-                    <a *ngIf="currentUser.phone" href="tel:{{currentUser.phone}}">{{currentUser.phone}}</a>
-                    <a *ngIf="ownProfile && !currentUser.phone" (click)="editContactInfo()">Add Phone</a>
+                    <a *ngIf="renderUserData.phone" href="tel:{{renderUserData.phone}}">{{renderUserData.phone}}</a>
+                    <a *ngIf="ownProfile && !renderUserData.phone" (click)="editContactInfo()">Add Phone</a>
                 </div>
             </div>
         </div>

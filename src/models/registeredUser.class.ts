@@ -7,12 +7,12 @@ export class RegisteredUser {
   fullName: string;
   displayName: string;
   title: string;
-  phone: number;
+  phone: string;
   profilePicture: string;
   organisations: string;
   onlineStatus: boolean;
   userStatus: string;
-  location: string;
+  timezone: string;
 
 
   constructor(obj?: any) {
@@ -29,7 +29,7 @@ export class RegisteredUser {
     this.organisations = obj ? obj.organisations : '';
     this.onlineStatus = obj ? obj.onlineStatus : '';
     this.userStatus = obj ? obj.userStatus : '';
-    this.location = obj ? obj.location : '';
+    this.timezone = obj ? obj.timezone : '';
   }
 
   public toJSON() {
@@ -47,7 +47,7 @@ export class RegisteredUser {
       organisations: this.organisations,
       onlineStatus: this.onlineStatus,
       userStatus: this.userStatus,
-      location: this.location,
+      timezone: this.timezone,
     };
   }
 }

@@ -6,22 +6,39 @@
         </button>
     </div>
     <div mat-dialog-actions class="form_position">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="form.valid && ngSubmit()">
             <div class="d_flex_column">
                 <p>
                     <mat-icon>lock</mat-icon>
                     <b>Email Address</b>
                 </p>
-                <input matInput placeholder="Email@email.de" disabled="" class="mat_input lock_input">
+                <input matInput placeholder="{{data.currentUser.email}}" disabled="" class="mat_input lock_input">
             </div>
             <div class="d_flex_column">
                 <p>Phone</p>
-                <input *ngIf="data.currentUser.phone" [value]="data.currentUser.phone" class="mat_input"><br *ngIf="data.currentUser.phone">
-                <input *ngIf="!data.currentUser.phone" placeholder="Enter your Phonenumber" class="mat_input"><br *ngIf="!data.currentUser.phone">
+
+                <input (input)="validateInput(form.controls.phone)"
+                [ngClass]=
+                "{'valid-input': form.controls.phone.valid && form.controls.phone.touched,
+                'invalid-input': form.controls.phone.invalid && form.controls.phone.touched }"
+                class="mat_input" 
+                formControlName="phone"
+                placeholder="Enter your Phonenumber"
+                maxlength="16">
+                <span class="error" *ngIf="form.controls.phone.errors?.['minlength']">
+                    The phone number must have at least 5 characters
+                </span>
+                <span class="error" *ngIf="form.controls.phone.errors?.['maxlength']">
+                    The phone number can have a maximum of 15 characters
+                </span>
+                <br *ngIf="form.controls.phone.errors?.['maxlength'] || form.controls.phone.errors?.['minlength']">
+                <span class="error" *ngIf="form.controls.phone.errors?.['nonNumeric']">
+                    Only numbers are allowed.
+                </span>
             </div>
             <div class="edit_btn_container">
                 <button mat-button mat-dialog-close>Cancel</button>
-                <button mat-button>Save Changes</button>
+                <button mat-button [disabled]="form.invalid" type="submit">Save Changes</button>
             </div>
         </form>
     </div>

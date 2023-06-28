@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisteredUser } from 'src/models/registeredUser.class';
 import { UploadPhotoDialogComponent } from '../upload-photo-dialog/upload-photo-dialog.component';
 import { EditProfilDialogComponent } from '../edit-profil-dialog/edit-profil-dialog.component';
 import { SetStatusDialogComponent } from '../set-status-dialog/set-status-dialog.component';
 import { EditContactInformationDialogComponent } from '../edit-contact-information-dialog/edit-contact-information-dialog.component';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -13,7 +15,9 @@ import { EditContactInformationDialogComponent } from '../edit-contact-informati
   templateUrl: './contact-profile.component.html',
   styleUrls: ['./contact-profile.component.scss']
 })
+
 export class ContactProfileComponent {
+
   ownUserPointMenuItems = [
     {
       text: 'Copy display name:',
@@ -33,7 +37,7 @@ export class ContactProfileComponent {
       function: 'viewYourFiles'
     },
     {
-      text: 'Set yourseld away',
+      text: 'Set yourself away',
       function: 'setAway'
     },
     {
@@ -41,6 +45,7 @@ export class ContactProfileComponent {
       function: 'copyMemberID'
     }
   ]
+
 
   public currentUser =
     {
@@ -68,16 +73,23 @@ export class ContactProfileComponent {
             visibility: true
           }
         ],
-      onlineStatus: true,
+      onlineStatus: false,
       userStatus: 'working remotely',
-      location: 'Germany',
+      timezone: 'Europe/Paris',
     }
 
-  public ownProfile = false
+
+  ownProfile = false
   users: any[] = [];
+  renderUserData: any = this.currentUser
+  currentTime: string = '';
 
-  constructor(public dialog: MatDialog, public firestore: Firestore) {
 
+  constructor(public dialog: MatDialog,
+    public firestore: Firestore,
+    private clipboard: Clipboard,
+    private http: HttpClient
+  ) {
     onSnapshot(collection(this.firestore, 'registeredUsers'), (snapshot) => {
       let user = snapshot.docs
         .map((doc) => {
@@ -86,34 +98,65 @@ export class ContactProfileComponent {
           return { id, ...data };
         })
       this.users = user;
-      console.log('user data:', this.users);
-      console.log('user data:', this.currentUser.id);
     });
   }
-  
+
+
+  copyText(textToCopy: string) {
+    this.clipboard.copy(textToCopy);
+  }
+
+
+  getSetStatusText(): string {
+    return this.currentUser.onlineStatus ? 'Set yourself away' : ' [AWAY]Set yourself Active';
+  }
+
 
   fakeLogin(id) {
     let existingUser = this.users.find(profil => profil.id === id);
-    console.log(existingUser);
     this.currentUser = existingUser
-    console.log('currentUser is :', this.currentUser);
     this.ownProfile = false
+    if (this.currentUser.onlineStatus === false) {
+      return
+    } else {
+      this.currentUser.onlineStatus = true
+      this.saveDataToFirestore(true)
+    }
+  }
+
+
+  onTimezoneChange(event: any) {
+    const timezone = event;
+    const url = `http://worldtimeapi.org/api/timezone/${timezone ? timezone : 'Europe/Paris'}`;
+    this.http.get(url).subscribe((response: any) => {
+      const datetime = response.datetime;
+      const [date, time] = datetime.split('T');
+      const [rawTime] = time.split('.');
+      const formattedDatetime = `${date} ${rawTime}`;
+      const currentTime = new Date(formattedDatetime).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      this.currentTime = currentTime;
+    });
   }
 
 
   getUserProfil(id) {
     let existingUser = this.users.find(profil => profil.id === id);
-    if (existingUser.id === this.currentUser.id) {
-      this.ownProfile = true
-    } else {
-      this.ownProfile = false
+    if (existingUser) {
+      this.renderUserData = existingUser
+      this.onTimezoneChange(this.renderUserData.timezone)
+      if (existingUser.id === this.currentUser.id) {
+        this.ownProfile = true
+      } else {
+        this.ownProfile = false
+      }
     }
   }
+
 
   matMenuRedirection(toTheFunction) {
     switch (toTheFunction) {
       case 'copyDisplayName':
-        console.log('copyDisplayName');
+        this.copyText(this.renderUserData.displayName)
         break;
       case 'viewPreferences':
         console.log('viewPreferences');
@@ -125,29 +168,52 @@ export class ContactProfileComponent {
         console.log('viewYourFiles');
         break;
       case 'setAway':
-        console.log('setAway');
+        this.toggleOnlineStatus();
         break;
       case 'copyMemberID':
-        console.log('copyMemberID');
+        this.copyText(this.renderUserData.id)
         break;
       default:
         throw 'Invalid action:' + toTheFunction;
     }
   }
 
+
+  toggleOnlineStatus() {
+    let status = this.currentUser.onlineStatus
+    if (status === false) {
+      this.currentUser.onlineStatus = true
+      this.saveDataToFirestore(status)
+    }
+    else if (status === true) {
+      this.currentUser.onlineStatus = false
+      this.saveDataToFirestore(status)
+    }
+  }
+
+
+  saveDataToFirestore(status) {
+    const userRef = doc(this.firestore, 'registeredUsers', this.currentUser.id);
+    updateDoc(userRef, { onlineStatus: status });
+  }
+
+
   getVisibilityStatus(viewAs) {
     console.log('status is:', viewAs);
   }
 
+
   uploadPhoto() {
     this.dialog.open(UploadPhotoDialogComponent);
   }
+
 
   editProfile() {
     this.dialog.open(EditProfilDialogComponent, {
       data: { currentUser: this.currentUser }
     });
   }
+
 
   editContactInfo() {
     this.dialog.open(EditContactInformationDialogComponent,
@@ -156,12 +222,15 @@ export class ContactProfileComponent {
       });
   }
 
+
   setStatus() {
     this.dialog.open(SetStatusDialogComponent);
   }
 
-  message() {// vorübergehend
+
+  message() {
     console.log("message")
   }
+
 
 }

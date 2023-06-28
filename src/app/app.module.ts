@@ -23,10 +23,13 @@ import { EditProfilDialogComponent } from './edit-profil-dialog/edit-profil-dial
 import { SetStatusDialogComponent } from './set-status-dialog/set-status-dialog.component';
 import { EditContactInformationDialogComponent } from './edit-contact-information-dialog/edit-contact-information-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateChannelDialogComponent } from './create-channel-dialog/create-channel-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { CreateChannelDialogComponent } from './create-channel-dialog/create-cha
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -59,9 +63,10 @@ import { CreateChannelDialogComponent } from './create-channel-dialog/create-cha
     MatDialogModule,
     MatMenuModule,
     MatInputModule,
-    
+    HttpClientModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

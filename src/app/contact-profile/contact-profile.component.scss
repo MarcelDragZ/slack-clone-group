@@ -1,6 +1,10 @@
 a {
     color: rgb(29, 155, 209);
     text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
 .noMargin {
@@ -32,6 +36,7 @@ a {
 .schedule_position {
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 .green-icon {
@@ -98,12 +103,15 @@ a {
     display: flex;
     justify-content: space-between;
     font-size: 22px;
-    font-weight: 900;
-    line-height: 1.36365;
     margin: 0;
+    align-items: center;
 
     button {
         color: rgb(29, 155, 209);
+    }
+
+    a {
+        font-size: 14px;
     }
 }
 

@@ -1,56 +1,89 @@
 <div class="edit_profil_main_container">
     <h1 mat-dialog-title>Edit your profile</h1>
     <div class="form_container">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="form.valid && ngSubmit()" ngNativeValidate>
             <div mat-dialog-actions class="form_position">
                 <div>
                     <div>
                         <p>Full name</p>
-                        <input class="mat_input" *ngIf="data.currentUser.fullName" [value]="data.currentUser.fullName">
-                        <input class="mat_input" *ngIf="!data.currentUser.fullName" placeholder="Enter your full name">
+                        <input (input)="validateInput(form.controls.fullName)" [ngClass]="{'valid-input': form.controls.fullName.valid && form.controls.fullName.touched,
+                        'invalid-input': form.controls.fullName.invalid && form.controls.fullName.touched }"
+                            maxlength="20" minlength="3" class="mat_input" formControlName="fullName">
+
+                        <span class="error" *ngIf="form.controls.fullName.errors?.['minlength']">
+                            Full Name must be at least 3 characters long.
+                        </span>
+                        <span class="error" *ngIf="form.controls.fullName.errors?.['required']">
+                            Full Name required
+                        </span>
+                        <span class="error" *ngIf="form.controls.fullName.errors?.['lettersOnly']">Only letters are
+                            allowed</span>
                     </div>
+
+
                     <div class="d_flex_column">
                         <p>Display name</p>
 
-                        <input class="mat_input" *ngIf="data.currentUser.displayName"
-                            [value]="data.currentUser.displayName"><br *ngIf="data.currentUser.displayName">
-
-                        <input class="mat_input" *ngIf="!data.currentUser.displayName"
-                            placeholder="Enter your display name"><br *ngIf="!data.currentUser.displayName">
-
+                        <input (input)="validateInput(form.controls.displayName)" [ngClass]="{'valid-input': form.controls.displayName.valid && form.controls.displayName.touched,
+                        'invalid-input': form.controls.displayName.invalid && form.controls.displayName.touched }"
+                            maxlength="20" minlength="3" class="mat_input" formControlName="displayName">
+                        <br>
                         <span> This could be your first name, or a nickname — however you’d like people
                             to refer to you in Slack.</span>
+                        <span class="error" *ngIf="form.controls.displayName.errors?.['minlength']">
+                            Full Name must be at least 3 characters long.
+                        </span>
+                        <span class="error" *ngIf="form.controls.displayName.errors?.['required']">
+                            Full Name required
+                        </span>
+                        <span class="error" *ngIf="form.controls.displayName.errors?.['lettersOnly']">Only letters are
+                            allowed
+                        </span>
                     </div>
+
                     <div class="d_flex_column">
                         <p>Title</p>
-                        <input class="mat_input" *ngIf="data.currentUser.title" [value]="data.currentUser.title"><br
-                            *ngIf="data.currentUser.title">
-                        <input class="mat_input" *ngIf="!data.currentUser.title" placeholder="Enter your title"><br
-                            *ngIf="!data.currentUser.title">
+                        <input (input)="validateInput(form.controls.title) " [ngClass]="{'valid-input': form.controls.title.valid && form.controls.title.touched,
+                        'invalid-input': form.controls.title.invalid && form.controls.title.touched }" maxlength="51"
+                            class="mat_input" formControlName="title">
+                        <br>
                         <span>Let people know what you do at Developer Akademie.</span><!-- TODO -->
+                        <span class="error" *ngIf="form.controls.title.errors?.['maxlength']">
+                            The title can't have more than 50 characters.
+                        </span>
                     </div>
                 </div>
                 <div class="profile_img_posi">
                     <p>Profile photo</p>
                     <img
                         src="../../assets/img/{{data.currentUser.profilePicture ? data.currentUser.profilePicture :'unknow_user.png'}}">
-                    <button class="edit_own_photo" mat-button (click)="uploadPhoto()">
+                    <button mat-button class="edit_own_photo" mat-button (click)="uploadPhoto()">
                         Upload Photo
                     </button>
                 </div>
+
+
                 <div class="d_flex_column">
                     <p>Time zone</p>
-                    <input class="mat_input" [value]="data.currentUser.location"><br>
-                    <span>Your current time zone. Used to send summary and notification emails, for times in your
-                        activity feeds, and for reminders.
+                    <select [ngClass]="{
+                        'valid-input': form.controls.timezone.valid && form.controls.timezone.touched,
+                        'invalid-input': form.controls.timezone.invalid && form.controls.timezone.touched
+                      }" class="mat_input" formControlName="timezone">
+                        <option *ngFor="let timezone of timezones" [value]="timezone">{{ timezone }}</option>
+                    </select>
+                    <span class="mg_top-20">Your current time zone. Used to send summary and notification emails, for
+                        times in your activity feeds, and for reminders.
+                    </span>
+                    <span class="error" *ngIf="form.controls.timezone.errors?.['required']">
+                        Time zone required
                     </span>
                 </div>
+
                 <div class="edit_btn_container">
                     <button mat-button mat-dialog-close>Cancel</button>
-                    <button mat-button (click)="setUser(data.currentUser.id)" >Save Changes</button>
+                    <button mat-button [disabled]="form.invalid" type="submit">Save Changes</button>
                 </div>
             </div>
         </form>
     </div>
-
 </div>
