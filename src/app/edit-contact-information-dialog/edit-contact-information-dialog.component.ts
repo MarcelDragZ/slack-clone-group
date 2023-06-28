@@ -10,7 +10,7 @@ export interface DialogData {
 @Component({
   selector: 'app-edit-contact-information-dialog',
   templateUrl: './edit-contact-information-dialog.component.html',
-  styleUrls: ['./edit-contact-information-dialog.component.scss']
+  styleUrls: ['./edit-contact-information-dialog.component.scss'],
 })
 
 export class EditContactInformationDialogComponent implements OnInit {
@@ -55,7 +55,7 @@ export class EditContactInformationDialogComponent implements OnInit {
         Object.assign(this.data.currentUser, this.editUser);
       })
       .catch((error) => {
-        console.error("Error updating document: ", error);
+        console.error('Error updating document: ', error);
       });
   }
 

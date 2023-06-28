@@ -30,6 +30,9 @@ import { CreateChannelDialogComponent } from './create-channel-dialog/create-cha
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 
+import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagePanelComponent } from './message-panel/message-panel.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,12 @@ import { MatListModule } from '@angular/material/list';
     SetStatusDialogComponent,
     EditContactInformationDialogComponent,
     CreateChannelDialogComponent,
+    MessageInputComponent,
+    MessagePanelComponent,
   ],
   imports: [
     BrowserModule,
+    QuillModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
