@@ -34,6 +34,7 @@ import { MatListModule } from '@angular/material/list';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { MessagePanelComponent } from './message-panel/message-panel.component';
 import { QuillModule } from 'ngx-quill';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { QuillModule } from 'ngx-quill';
     CreateChannelDialogComponent,
     MessageInputComponent,
     MessagePanelComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,
