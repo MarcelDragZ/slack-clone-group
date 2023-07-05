@@ -64,9 +64,17 @@ export class LoginComponent implements OnInit {
   logInGuest() {
     let user = this.user.find((user) => user.email.toLowerCase() === 'Guest@gmail.com'.toLowerCase());
     if (user) {
-      this.setLocalStorage(user);
-      this.router.navigate(['/workspace']);
-      console.log('Erfolgreich eingeloggt');
+      bcrypt.compare('Guest', user.password, (err, result) => {
+        if (result) {
+          this.setLocalStorage(user);
+          this.router.navigate(['/workspace']);
+          console.log('Erfolgreich eingeloggt');
+        } else {
+          console.log('Falsches Passwort');
+        }
+      });
+    } else {
+      console.log('Benutzer nicht gefunden');
     }
   }
 
