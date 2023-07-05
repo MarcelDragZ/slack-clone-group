@@ -4,17 +4,19 @@ import * as bcrypt from 'bcryptjs';
 import { provideAuth, getAuth, GoogleAuthProvider } from '@angular/fire/auth';
 import { signInWithPopup } from '@firebase/auth';
 import { Router } from '@angular/router';
+import { LoggedOnUser } from 'src/models/loggedOnUser.class';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  loggedOnUser: any = new LoggedOnUser();
   user;
   email;
   password;
 
-  constructor(private firestore: Firestore, private router: Router) {}
+  constructor(private firestore: Firestore, private router: Router) { }
 
   ngOnInit(): void {
     onSnapshot(collection(this.firestore, 'registeredUsers'), (snapshot) => {
@@ -28,11 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   logInUser() {
-    let user = this.user.find((user) => user.email === this.email);
+    let user = this.user.find((user) => user.email.toLowerCase() === this.email.toLowerCase());
 
     if (user) {
       bcrypt.compare(this.password, user.password, (err, result) => {
         if (result) {
+          this.setLocalStorage(user);
           this.router.navigate(['/workspace']);
           console.log('Erfolgreich eingeloggt');
         } else {
@@ -47,14 +50,29 @@ export class LoginComponent implements OnInit {
   async loginWithGoogle() {
     let auth = getAuth();
     let provider = new GoogleAuthProvider();
-
     try {
       let result = await signInWithPopup(auth, provider);
       let user = result.user;
+      console.log(user);
       this.router.navigate(['/workspace']);
       console.log('Erfolgreich eingeloggt mit Google:', user);
     } catch (error) {
       console.error('Fehler bei der Google-Anmeldung:', error);
     }
+  }
+
+  logInGuest() {
+    let user = this.user.find((user) => user.email.toLowerCase() === 'Guest@gmail.com'.toLowerCase());
+    if (user) {
+      this.setLocalStorage(user);
+      this.router.navigate(['/workspace']);
+      console.log('Erfolgreich eingeloggt');
+    }
+  }
+
+  async setLocalStorage(user) {
+    this.loggedOnUser.id = user.id;
+    this.loggedOnUser.timeStamp = new Date().getTime();
+    localStorage.setItem('loggedOnUser', JSON.stringify(this.loggedOnUser));
   }
 }
